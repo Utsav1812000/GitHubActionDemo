@@ -15,8 +15,8 @@ jobs:
           DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
           DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       - name: docker build
-        run: docker build -t Utsav1812000/GitHubActionDemo:${{ env.GITHUB_REF_SLUG }} .
+        run: docker build -t Utsav1812000/github-action-demo:${{ env.GITHUB_REF_SLUG }} .
       - name: docker push
         uses: actions-hub/docker@master
         with:
-          args: push Utsav1812000/GitHubActionDemo:${{ env.GITHUB_REF_SLUG }}
+          args: push Utsav1812000/github-action-demo:${{ env.GITHUB_REF_SLUG }}
