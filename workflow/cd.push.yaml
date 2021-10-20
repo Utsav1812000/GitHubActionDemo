@@ -1,0 +1,22 @@
+on: push
+name: build and push - demo1
+jobs:
+  build-and-push:
+    name: build and push
+    runs-on: ubuntu-latest
+    steps:
+      - name: github checkout
+        uses: actions/checkout@master
+      - name: Inject slug/short variables
+        uses: rlespinasse/github-slug-action@v3.x
+      - name: docker login
+        uses: actions-hub/docker/login@master
+        env:
+          DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+          DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+      - name: docker build
+        run: docker build -t Utsav1812000/GitHubActionDemo:${{ env.GITHUB_REF_SLUG }} .
+      - name: docker push
+        uses: actions-hub/docker@master
+        with:
+          args: push Utsav1812000/GitHubActionDemo:${{ env.GITHUB_REF_SLUG }}
